@@ -6,7 +6,7 @@
 /*   By: laiherna <laiherna@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 23:26:57 by laiherna          #+#    #+#             */
-/*   Updated: 2023/07/26 13:21:07 by laiherna         ###   ########.fr       */
+/*   Updated: 2023/07/27 21:17:04 by laiherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
 void	ft_putnbr(int nb)
 {
+	unsigned int	c_num;
+
+	c_num = 0;
 	if (nb < 0)
 	{
-		nb = -nb;
-		ft_putchar('-');
-	}
-	if (nb == -2147483648)
-	{
-		ft_putchar('2');
-		nb = 147483648;
-	}
-	if (nb < 10)
-	{
-		ft_putchar(nb + 48);
+		write(1, "-", 1);
+		c_num = -nb;
 	}
 	else
+		c_num = nb;
+	if (c_num > 9)
 	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
+		ft_putnbr(c_num / 10);
+		c_num %= 10;
 	}
+	c_num = c_num + '0';
+	write(1, &c_num, 1);
 }
 
-/* int	main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	if (argc == 2)
 		ft_putnbr(atoi(argv[1]));
 	return (0);
-} */
+}
